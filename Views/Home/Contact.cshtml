@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <title>AIA Thailand</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta property="og:title" content="บาร์โค้ดสำหรับชำระเบี้ย" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://direct.aia.co.th/pay" />
+    <meta property="og:image" content="https://direct.aia.co.th/btoc/barcode/image/aia-logo.png" />
+    <meta property="og:image:type" content="image/png" />
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/font.css">
+    <link rel="stylesheet" type="text/css" href="styles/site.css">
+    <script type="text/javascript" src="js/bwip.js"></script>
+    <script type="text/javascript" src="lib/jquery-1.4.1.js"></script>
+    <script type="text/javascript" src="lib/symdesc.js"></script>
+    <script type="text/javascript" src="lib/needyoffset.js"></script>
+    <script type="text/javascript" src="lib/canvas.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://assets.adobedtm.com/90c58d4aa8a1b33beefab4bf8138774c1a1a4147/satelliteLib-80c9b999d8066a777786267a94409ed6477a07e1.js"></script>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="main-header">
+            <div class="row full-width">
+                <div class="col-xs-3">
+                    <div class="brand-aia"></div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="heading">บาร์โค้ดสำหรับชำระเบี้ย</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="full-width">
+                <div class="rotate-area">
+                    <div class="rotate-pic"></div>
+                    <div class="rotate-text">หมุนโทรศัพท์ของท่านเป็นแนวนอน<br />เพื่อแสดงบาร์โค้ด</div>
+                </div>
+
+                <div class="barcode-area">
+                    <div id="bg">
+                        <canvas id="barcode" class="barcode"></canvas>
+                        <div id="barcodeText" class="barcodeText"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row text-aia">
+                <div class="col-xs-6 line-padding full-row">
+                    <text>
+                        <text-bold>จำนวนเงินที่ต้องชำระ</text-bold><br />
+                        <amount id="amount"></amount>&nbsp;บาท
+                    </text>
+                </div>
+                <div class="col-xs-3 line-padding half-row">
+                    <text>กรมธรรม์เลขที่<br /></text>
+                    <text id="policy"></text>
+                </div>
+                <div class="col-xs-3 line-padding half-row">
+                    <text>กำหนดชำระเบี้ย<br /></text>
+                    <text id="exp"></text>
+                </div>
+            </div>
+
+            <div class="bank-detail-area">
+                <div class="separator"></div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="bank-refer">เพื่อนำเข้าบัญชี บริษัท เอไอเอ จำกัด</div>
+                    </div>
+                    <div class="col-xs-6 bank-details-heading">
+                        <label class="">สำหรับธนาคาร / ผู้บริการรับชำระเงิน</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-3">
+                            <div class="refNo">Ref No.1&nbsp;&nbsp;<span id="ref1" class="big-text"></span></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="refNo">Ref No.2&nbsp;&nbsp;<span id="ref2" class="big-text"></span></div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="refNo paddingleft15">จำนวนเงินที่ต้องชำระ&nbsp;&nbsp;<span id="amount2" class="big-text"></span>&nbsp;บาท</div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="menu" class="hidden">
+        <table border=0 cellpading=0 cellspacing=0>
+            <tr>
+                <td>
+                    <table border=0 cellpading=0 cellspacing=0>
+                        <tr><th>Bar Code:<td><select id="symbol"></select>
+                        <tr><th>Bar Text:<td><input id="symtext" type="text">
+                        <tr><th>Alt Text:<td><input id="symaltx" type="text">
+                        <tr><th>Options:<td><input id="symopts" type="text">
+                    </table>
+                <td>
+                    <table border=0 cellpading=0 cellspacing=0>
+                        <tr>
+                            <th>Scale:
+                            <td>
+                                <input type="text" id="scale" value=2>
+                                <span class="button up"></span>
+                                <span class="button dn"></span>
+                        <tr>
+                            <th>Rotate:
+                            <td>
+                                <label for="rotN"><input type="radio" name="rot" value="N" id="rotN" checked>Normal</label>
+                                <label for="rotR"><input type="radio" name="rot" value="R" id="rotR">90 CW</label>
+                                <label for="rotL"><input type="radio" name="rot" value="L" id="rotL">90 CCW</label>
+                                <label for="rotI"><input type="radio" name="rot" value="I" id="rotI">180</label>
+                        <tr><td><br>
+                        <tr><td><td><button onclick="render()">Show Barcode</button>
+                    </table>
+            <tr><td><br>
+        </table>
+    </div>
+
+    <script type="text/javascript">_satellite.pageBottom();</script>
+</body>
+</html>

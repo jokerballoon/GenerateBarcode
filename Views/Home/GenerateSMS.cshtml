@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Generate SMS";
+}
+
+<h2>Generate SMS</h2>
+
+<form action="">
+    Customer No. :<br>
+    <input type="text" pattern="[0-9]*" minlength="16" maxlength="16" size="25" name="csNo" value="5807010002753714" required>
+    <br><br />
+    Contract No. :<br>
+    <input type="text" pattern="[0-9]*" minlength="16" maxlength="16" size="25" name="contractNo" value="3969807000606362" required>
+    <br><br><br>
+    <input type="submit" value="Generate SMS">
+</form>
+<br />
+<br />
+<h2>
+    @ViewBag.msg  
+    <a href="@ViewBag.shortURL">@ViewBag.shortURL</a>
+</h2>
+
